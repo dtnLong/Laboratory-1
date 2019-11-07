@@ -68,11 +68,10 @@ int result(int arg1, int arg2, string op) {//
 
 int main() {
 	string argument;
-	string arg[3];
 	int arg_element = 0;
 	int prev_element = 0;
 	while (true) {
-		fill(arg, arg + 3, "");
+		string arg[3];
 		arg_element = 0;
 		prev_element = 0;
 		cout << "Enter an arithmatic expression: ";
