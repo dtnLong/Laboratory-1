@@ -23,7 +23,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Laboratory 1.cpp">
+    <ClCompile Include="laboratory1_groupBinhHongLong.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -71,14 +71,16 @@ int main() {
 	string arg[3];
 	int arg_element = 0;
 	int prev_element = 0;
-	bool exit = false;
-	while (argument != "Exit") {
+	while (true) {
 		fill(arg, arg + 3, "");
 		arg_element = 0;
 		prev_element = 0;
 		cout << "Enter an arithmatic expression: ";
 		getline(cin, argument);
-		for (int next_element = 1; next_element < (argument + ' ').size(); next_element++) {
+		if (argument == "Exit") {
+			break;
+		}
+		for (int next_element = 1; next_element <= argument.size(); next_element++) {
 			if (argument[prev_element] == ' ' && argument[next_element] != ' ') {
 				arg_element++;
 			} else if (arg_element > 2) {
@@ -93,5 +95,10 @@ int main() {
 			cout << "The result is " << result(stoi(arg[0]), stoi(arg[2]), arg[1]) << endl;
 		}
 	}
+	cout << "LABORATORY GROUP BINHHONGLONG" << endl;
+	cout << "S3757333,s3757333@rmit.edu.vn,Dang,Long" << endl;
+	cout << "S3715271,s3715271@rmit.edu.vn,Phan,Binh" << endl;
+	cout << "S3757165,s3757165@rmit.edu.vn,Quan,Hong" << endl;
+	cout << "S3681446,s3681446@rmit.edu.vn,Dinh,Nhat" << endl;
 	return 0;
 } 
