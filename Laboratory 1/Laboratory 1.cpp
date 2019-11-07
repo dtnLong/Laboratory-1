@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Checking if the number is the correct integer
 bool isInt(string number) {
 	bool isdot = false;
 	int start_digit = 0;
@@ -28,13 +29,13 @@ bool isInt(string number) {
 	return true;
 }
 
+// Checking if the expression is correct
 bool checkArgument(string arg[3]) {
 	for (int i = 0; i < 3; i += 2) {
 		if (!isInt(arg[i])) {
 			cerr << "Error! Invalid Number Input" << endl;
 			return false;
-		}
-		else if (stoi(arg[i]) < -32768 || stoi(arg[i]) > 32767) {
+		} else if (stoi(arg[i]) < -32768 || stoi(arg[i]) > 32767) {
 			cerr << "Error! Invalid Number Input Range" << endl;
 			return false;
 		}
@@ -50,7 +51,8 @@ bool checkArgument(string arg[3]) {
 	}
 }
 
-int result(int arg1, int arg2, string op) {
+// Calculate the result
+int result(int arg1, int arg2, string op) {//
 	if (op == "+") {
 		return arg1 + arg2;
 	} else if (op == "-") {
@@ -76,18 +78,18 @@ int main() {
 		prev_element = 0;
 		cout << "Enter an arithmatic expression: ";
 		getline(cin, argument);
-		for (int next_element = 1; next_element <= argument.size(); next_element++) {
+		for (int next_element = 1; next_element < (argument + ' ').size(); next_element++) {
 			if (argument[prev_element] == ' ' && argument[next_element] != ' ') {
 				arg_element++;
 			} else if (arg_element > 2) {
 				cerr << "Error! Input argument contain dummy value" << endl;
-				continue;
+				break;
 			} else if (argument[prev_element] != ' ') {
 				arg[arg_element] += argument[prev_element];
 			}
 			prev_element++;
 		}
-		if (checkArgument(arg)) {
+		if (prev_element == argument.size() && checkArgument(arg)) {
 			cout << "The result is " << result(stoi(arg[0]), stoi(arg[2]), arg[1]) << endl;
 		}
 	}
