@@ -1,10 +1,36 @@
 #include "pch.h"
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 // Checking if the number is the correct integer
+int converToInt(string number) {
+	string new_numstring = "";
+	for (int i = 0; i < number.length(); i++) {
+		if (number[i] == '.') {
+			break;
+		} else {
+			new_numstring += number[i];
+		}
+	}
+	int toint = 0;
+	int start_digit = 0;
+	if (new_numstring[0] == '-') {
+		start_digit = 1;
+	}
+	for (char i = start_digit; i < new_numstring.length(); i++) {
+		if (new_numstring[i] == '.') {
+			break;
+		}
+		toint += (new_numstring[i] - 48) * (pow(10, (new_numstring.length() - 1)))/pow(10, i);
+	}
+	if (new_numstring[0] == '-') {
+		return (-1 * toint);
+	} else {
+		return toint;
+	}
+}
+
 bool isInt(string number) {
 	bool isdot = false;
 	int start_digit = 0;
@@ -35,7 +61,7 @@ bool checkArgument(string arg[3]) {
 		if (!isInt(arg[i])) {
 			cerr << "Error! Invalid Number Input" << endl;
 			return false;
-		} else if (stoi(arg[i]) < -32768 || stoi(arg[i]) > 32767) {
+		} else if (converToInt(arg[i]) < -32768 || converToInt(arg[i]) > 32767) {
 			cerr << "Error! Invalid Number Input Range" << endl;
 			return false;
 		}
@@ -43,7 +69,7 @@ bool checkArgument(string arg[3]) {
 	if (arg[1] != "%" && arg[1] != "/" && arg[1] != "+" && arg[1] != "-" && arg[1] != "*") {
 		cerr << "Error! Invalid Operator" << endl;
 		return false;
-	} else if (arg[1] == "/" && arg[2] == "0") {
+	} else if (arg[1] == "/" && converToInt(arg[2]) == 0) {
 		cerr << "Error! Division by zero" << endl;
 		return false;
 	} else {	
@@ -67,7 +93,7 @@ int result(int arg1, int arg2, string op) {//
 }
 
 int main() {
-	string argument;
+	char argument[100];
 	int arg_element = 0;
 	int prev_element = 0;
 	while (true) {
@@ -75,11 +101,11 @@ int main() {
 		arg_element = 0;
 		prev_element = 0;
 		cout << "Enter an arithmatic expression: ";
-		getline(cin, argument);
-		if (argument == "Exit") {
+		cin.getline(argument, 99);
+		if (strcmp(argument, "Exit") == 0) {
 			break;
 		}
-		for (int next_element = 1; next_element <= argument.size(); next_element++) {
+		for (int next_element = 1; next_element <= strlen(argument); next_element++) {
 			if (argument[prev_element] == ' ' && argument[next_element] != ' ') {
 				arg_element++;
 			} else if (arg_element > 2) {
@@ -90,8 +116,8 @@ int main() {
 			}
 			prev_element++;
 		}
-		if (prev_element == argument.size() && checkArgument(arg)) {
-			cout << "The result is " << result(stoi(arg[0]), stoi(arg[2]), arg[1]) << endl;
+		if (prev_element == strlen(argument) && checkArgument(arg)) {
+			cout << "The result is " << result(converToInt(arg[0]), converToInt(arg[2]), arg[1]) << endl;
 		}
 	}
 	cout << "LABORATORY GROUP BINHHONGLONG" << endl;
