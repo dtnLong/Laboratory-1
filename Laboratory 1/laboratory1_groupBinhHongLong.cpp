@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// Checking if the number is the correct integer
+// Converting from string to int
 int converToInt(string number) {
 	string new_numstring = "";
 	for (int i = 0; i < number.length(); i++) {
@@ -31,6 +31,7 @@ int converToInt(string number) {
 	}
 }
 
+// Checking if the number is the correct integer
 bool isInt(string number) {
 	bool isdot = false;
 	int start_digit = 0;
